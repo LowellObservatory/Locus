@@ -1,0 +1,9 @@
+camera_open
+set_memory_map 1000
+load_timing_dsp "../misc/tim.lod.0x04_0x8C_20V_straight"
+set_amplifier "LEFT"
+sleep 0.1
+start_idle
+power_on
+sleep 0.1
+camera_close

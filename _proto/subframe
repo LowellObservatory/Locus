@@ -1,0 +1,30 @@
+camera_open
+set_memory_map 1048576
+set_row_col 200 200
+sleep 0.5
+set_subframe_size 0 200 200
+set_subframe_position 127 240
+sleep 0.5
+stop_idle
+set_image_parameters 0x10 1 1 1
+set_exposure_time 160
+start_exposure
+sleep 2.0
+start_idle
+return_image 200 200 0
+sleep 0.5
+clear_subframe
+set_row_col 200 200
+sleep 0.5
+set_subframe_size 0 200 200
+set_subframe_position 320 240
+sleep 0.5
+stop_idle
+set_image_parameters 0x10 1 1 1
+set_exposure_time 160
+start_exposure
+sleep 2.0
+start_idle
+return_image 200 200 0
+sleep 0.5
+camera_close
