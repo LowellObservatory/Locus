@@ -1,6 +1,6 @@
 ## _proto
 
-- This directory contains a prototype version of Locus written to see if this would work.
+- This directory contains a prototype version of the library written to see if Python is suitable for development (it is).
 - There are no tests, the code is not well commented, and there is no other documentation.
 - This example application only contains a subset of what will be the final application.
 - 'center', 'expsweep', 'setup', and 'subframe' are ArcCon (ArcCam) scripts.
