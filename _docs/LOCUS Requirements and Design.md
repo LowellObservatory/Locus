@@ -68,7 +68,7 @@ and, when possible, we will only use libraries for which the source code is avai
 * Various standards for communication will be evaluated and used when their application is appropriate.
 These may include:
   * XML (Extensible Markup Language)
-  * INDI ([Instrument Neutral Distributed Interface](http://www.clearskyinstitute.com/INDI/INDI.pdf)
+  * INDI ([Instrument Neutral Distributed Interface](http://www.clearskyinstitute.com/INDI/INDI.pdf))
   * FITS (Flexible Image Transport System)
 
 ### Interface Requirements
