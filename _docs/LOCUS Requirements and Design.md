@@ -36,4 +36,4 @@ to update telescope pointing.
 
 Each of these sub-elements will have its own Requirements and Design document.
 
-![LOCUS Diagram](https://github.com/LowellObservatory/Locus/_images/LOCUS-Structure-011519.png "LOCUS Diagram")
+![diagram]: https://github.com/LowellObservatory/Locus/blob/master/_images/LOCUS-Structure-011519.png "test"
