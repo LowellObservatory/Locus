@@ -15,7 +15,9 @@ DCT software systems using the ActiveMQ message broker. The primary external sof
 are the instrument control GUI (LOUI), the “Moving Parts” software (joe), and the various
 aspects of the telescope control system via the ActiveMQ Bridge. The new software will be
 broadly configurable using configuration files and will produce various levels of log files
-that report progress as well as errors as specified below.
+that report progress as well as errors.
+
+Below is a block diagram of the LOIS software.  LOCUS will replace LOIS.
 
 <img src="https://github.com/LowellObservatory/Locus/blob/master/_images/LOIS.png" allign="middle" alt="test" width="500"/>
 
