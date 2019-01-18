@@ -17,7 +17,7 @@ aspects of the telescope control system via the ActiveMQ Bridge. The new softwar
 broadly configurable using configuration files and will produce various levels of log files
 that report progress as well as errors as specified below.
 
-![diagram](https://github.com/LowellObservatory/Locus/blob/master/_images/LOIS.png "test")
+<img src="https://github.com/LowellObservatory/Locus/blob/master/_images/LOIS.png" allign="middle" alt="test" width="500"/>
 
 ### Scope of this Document
 
