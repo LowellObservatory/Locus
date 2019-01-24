@@ -86,4 +86,58 @@ These may include:
   * The external NAS for working data and the DCT archival RAID system. Interaction with these systems will not use ActiveMQ but will use standard operating system features such as NFS mounts, scp, etc.
 * The system will communicate instrument and image telemetry to the broker for consumption by other processes
 
+The diagram below outlines a possible LoCam to CCD interface using the Instrument Neutral Distributed Interface protocol.
+
 ![diagram](https://github.com/LowellObservatory/Locus/blob/master/_images/LOCUS-INDI-Server.png "test")
+
+* The system will write FITS images to disk. Documentation in the form of an observing log will be generated and stored to allow users to find specific data.
+* Data will be stored locally, to a working copy on an external NAS that observers may manipulate, and in original form to the DCT data archive RAID system.
+* The various parts of the system will display an optional console that can show progress and errors in real time.
+* The system will include certain specialized engineering interfaces that are not generally available to observers. This would include, but not be limited to, a scriptable command-line console or control GUI for test and engineering purposes.
+
+### General Functional Requirements
+
+* The system will allow the user to initialize the instrument systems, set up observing parameters, and take/store images.
+* The system must include limit checking and error handling for supplied parameters.
+* The system will allow for certain automated sequences and repetitive observations to be configured and implemented by a scripting approach. Examples include guiding, focusing, dither patterns, and filter sequences.  The scripting language will be Python and the system will expose a Python API for system control that will not allow dangerous operations.
+* Since NIHTS and LMI can be used simultaneously this software should be built in a way that allows both instruments to be controlled by a single control package in the future.
+* Remote operation of the system must be supported by some means.
+
+### Specific Functional Requirements
+
+* These will be detailed in the requirements documents for LoCam, LoFits, LoFocus, and LoGuide
+
+### Logging Requirements
+
+* This information will be specified in more detail in the subsystem requirements.  All parts of the system will
+generate log files of commands issued and responses/results of those commands.  Log levels will be used to allow
+easy sorting of events.  Log files will need to be managed/rotated to avoid overly large log files.
+
+### Ancillary Data Requirements:
+
+* The software will subscribe to and monitor various facility data (to be specified)
+* Some instrument and image telemetry will be supplied to the broker including:
+  * Detector, cold tip, heat sink temperatures, cooler power, and heater currents.
+  * Additional temperatures for NIHTS
+  * Instrument status = Software running (heartbeat) = Integrating = Idle = Error (Need to define this). A failed DSP upload would be an example.
+  
+### Scripting
+
+* Python will be used as a scripting language
+* The system will provide at least one API for use in building scripts.  There may be two versions, one for expert users.
+* Some of the uses for scripts are:
+  * Guiding
+  * Wavefront sensing data acquisition
+  * Focusing
+  * Dither patterns, ABBA dithers, etc.
+  * Filter sequences
+  * WOLM data acquisition?
+  
+### Possible Future Improvements
+
+* Slit viewing camera control for spectrographs; DeVeny and NIHTS to begin with.
+* Future support for other controllers such as the STA Archon devices.
+* Guiding using the spectrograph slit viewing cameras.
+* For ARC controllers support abort, stop, pause/resume, and on-the-fly exposure time change.
+* Support Fowler sampling for IR arrays with ARC controllers.
+* Support sampling up the ramp for IR arrays with ARC controllers.
