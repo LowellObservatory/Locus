@@ -99,9 +99,8 @@ The diagram below outlines a possible LoCam to CCD interface using the Instrumen
 
 * The system will allow the user to initialize the instrument systems, set up observing parameters, and take/store images.
 * The system must include limit checking and error handling for supplied parameters.
-* The system will allow for certain automated sequences and repetitive observations to be configured and implemented by a scripting approach. Examples include guiding, focusing, dither patterns, and filter sequences.  The scripting language will be Python and the system will expose a Python API for system control that will not allow dangerous operations.
-* Since NIHTS and LMI can be used simultaneously this software should be built in a way that allows both instruments to be controlled by a single control package in the future.
-* Remote operation of the system must be supported by some means.
+* The system will allow for certain automated sequences and repetitive observations to be configured and implemented by a                  scripting approach. Examples include guiding, focusing, dither patterns, and filter sequences.  The scripting language will be      Python and the system will expose a Python API for system control that will not allow dangerous operations.
+* This software should be built in a way that allows multiple instruments to be controlled by a single control package in the future.
 
 ### Specific Functional Requirements
 
@@ -118,7 +117,6 @@ easy sorting of events.  Log files will need to be managed/rotated to avoid over
 * The software will subscribe to and monitor various facility data (to be specified)
 * Some instrument and image telemetry will be supplied to the broker including:
   * Detector, cold tip, heat sink temperatures, cooler power, and heater currents.
-  * Additional temperatures for NIHTS
   * Instrument status = Software running (heartbeat) = Integrating = Idle = Error (Need to define this). A failed DSP upload would be an example.
   
 ### Scripting
