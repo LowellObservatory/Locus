@@ -2,7 +2,7 @@
 
 ### Introduction
 
-There is a current need for a new software system that will control of the detectors used
+There is a current need for a new software system that will control the detectors used
 in the instruments at the DCT, write complete FITS files on disk, and provide telescope
 focusing and guiding capabilities. The old LOIS system is difficult to understand, poorly
 documented, contains a lot of unused legacy code, nobody at Lowell knows its internals, and
@@ -37,7 +37,11 @@ center for each image in the sweep, and returns the point of best focus for the 
 4. LoGuide - Provide an application that will take images at regular intervals, locate
 the position of the star in each image and provide feedback to the telescope control system
 to update telescope pointing.
-5. possible others?
+5. LoMeta - This Service will continually aggregate meta-information about the state of the
+telescope systems.  Initially, this information will be primarily used by LoFits to retreive
+information for FITS headers, but other clients and services may also use it, possibly the
+facility summary.
+6. possible others?
 
 Each of these sub-elements will have its own Requirements and Design document.
 
@@ -55,12 +59,15 @@ The diagram below outlines the structure of the overall system.
   
 ### Software and System Requirements
 
-Greater detail on these requirements will be detailed in the individual Requirements and Design
+Greater detail on these requirements will be given in the individual Requirements and Design
 documents for the individual modules listed above.
 
 * The software will run under 64-bit linux, in general, but some may operate under the MacOS (e.g. spectrograph slit viewing camera control software).
 * The software will be written in Python, the current best choice in terms of flexibility and portability.
 * The software will be object oriented and classes will conform the the “single responsibility” principle documented in Robert C. Martin’s “Clean Code”.
+* As a system, the archetecture will center around "microservices" although the services will not be very small.  The
+ActiveMQ broker will continue to act as a message delivery system.  We may move some of the message formats to "Protocol
+Buffer" format because this is a structured, self documenting, binary format that is fast and efficient.
 * The software will be well documented both externally and within the code. It will be developed following the "waterfall" approach to software design beginning with requirements development, internal design at several levels, code development and testing, with design and code reviews as appropriate. Late changes to requirements and design features will be carefully reviewed before being implemented.
 * A programmer's guide and a user’s guide will be developed along with the software.
 * The software will include internal unit test modules when possible, which will provide a detailed testing suite when the project is done.
@@ -74,11 +81,13 @@ These may include:
   * XML (Extensible Markup Language)
   * INDI ([Instrument Neutral Distributed Interface](http://www.clearskyinstitute.com/INDI/INDI.pdf))
   * FITS (Flexible Image Transport System)
+  * Protocol Buffers may be used for the wire tranport layer.
 
 ### Interface Requirements
 
 * Communication protocols via the ActiveMQ broker must follow the present protocols between LOIS and the software packages it communicates with. (for now).
-* The system will operate with detector controllers made by Astronomical Research Cameras (ARC; aka "Leach" controllers). This support must be designed with an eye toward extending support to other camera types such as commercial cameras with USB or network interfaces with software APIs, or STA Archon controllers.
+* The system will operate with detector controllers made by Astronomical Research Cameras (ARC; aka "Leach" controllers). This support must be designed with an eye toward extending support to other camera types such as commercial cameras with USB or network interfaces with software APIs, or STA Archon controllers.  The INDI protocol will be used for communications with
+instruments.
 * The system will respond to commands sent from various other software systems and will retrieve information needed for its operation from other subsystems via the ActiveMQ broker. The systems it will interact with include:
   * The LOUI user interface software
   * The joe mechanism control software
@@ -99,12 +108,12 @@ The diagram below outlines a possible LoCam to CCD interface using the Instrumen
 
 * The system will allow the user to initialize the instrument systems, set up observing parameters, and take/store images.
 * The system must include limit checking and error handling for supplied parameters.
-* The system will allow for certain automated sequences and repetitive observations to be configured and implemented by a                  scripting approach. Examples include guiding, focusing, dither patterns, and filter sequences.  The scripting language will be      Python and the system will expose a Python API for system control that will not allow dangerous operations.
+* The system will allow for certain automated sequences and repetitive observations to be configured and implemented by a                  scripting approach. Examples include guiding, focusing, dither patterns, and filter sequences.  The scripting language will be Python and the system will expose a Python API for system control that will not allow dangerous operations.
 * This software should be built in a way that allows multiple instruments to be controlled by a single control package in the future.
 
 ### Specific Functional Requirements
 
-* These will be detailed in the requirements documents for LoCam, LoFits, LoFocus, and LoGuide
+* These will be detailed in the requirements documents for LoCam, LoFits, LoFocus, LoMeta, and LoGuide
 
 ### Logging Requirements
 
@@ -114,7 +123,7 @@ easy sorting of events.  Log files will need to be managed/rotated to avoid over
 
 ### Ancillary Data Requirements:
 
-* The software will subscribe to and monitor various facility data (to be specified)
+* The software will subscribe to and monitor various facility data (to be specified) (LoMeta)
 * Some instrument and image telemetry will be supplied to the broker including:
   * Detector, cold tip, heat sink temperatures, cooler power, and heater currents.
   * Instrument status = Software running (heartbeat) = Integrating = Idle = Error (Need to define this). A failed DSP upload would be an example.
@@ -139,3 +148,4 @@ easy sorting of events.  Log files will need to be managed/rotated to avoid over
 * For ARC controllers support abort, stop, pause/resume, and on-the-fly exposure time change.
 * Support Fowler sampling for IR arrays with ARC controllers.
 * Support sampling up the ramp for IR arrays with ARC controllers.
+* Support for All-Sky Camera operations.
