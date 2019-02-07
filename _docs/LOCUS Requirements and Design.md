@@ -43,7 +43,7 @@ Each of these sub-elements will have its own Requirements and Design document.
 
 The diagram below outlines the structure of the overall system.
 
-![diagram](https://github.com/LowellObservatory/Locus/blob/master/_images/LOCUS-Structure-011519.png "test")
+![diagram](https://github.com/LowellObservatory/Locus/blob/master/_images/LOCUS-Structure-020719.jpg "test")
 
 ### Use cases for LOCUS
 
